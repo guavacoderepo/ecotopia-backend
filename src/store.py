@@ -68,13 +68,14 @@ def products():
 # users end 
     else:
         # get db items
+        page = request.args.get("page", 1, type=int)
+        per_page = request.args.get("per_page",10,type=int)
+        items = db.store.find()
         data = []
-        for item in db.store.find():
+        for item in items:
             itemdata = {"Id": str(item["_id"]), "Description":item["Description"], "Category":item["Category"], "Price":item["Price"], "Title":item["Title"], "Quantity": item["Quantity"], "ImgUrl":item["ImgUrl"],"Created_at":item["Created_at"]}
             data.append(itemdata)
         status = True
-
-
 
     return jsonify({"status":status,"message":message,"data":data})
 

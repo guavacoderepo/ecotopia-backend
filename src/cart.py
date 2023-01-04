@@ -1,11 +1,10 @@
-from flask import Blueprint, request, jsonify, redirect, url_for
+from flask import Blueprint, request, jsonify
 from src.constants.http_status_code import HTTP_400_BAD_REQUEST
 from src.modules.mongodb import mongo
 from datetime import datetime
 from bson import ObjectId
 
 cart = Blueprint("cart",__name__,url_prefix="/api/v1/cart")
-
 
 
 @cart.route("/add/", methods = ["POST"])
@@ -62,7 +61,6 @@ def add_cart():
         # upload change 
         try:
            
-
             # update users db cart
             db.users.update_one({"Address":user_address}, {"$set":{"Cart":cartlist}})
 
@@ -74,19 +72,12 @@ def add_cart():
 
             # return users data here
 
-
         except:
             # incorrect method
             message = "an error was encountered and process terminated"
 
-
-
     else:
-        message = "The method is not allowed for the requested URL."
-
-
-
-    
+        message = "The method is not allowed for the requested URL."    
 
     return jsonify({"status":status,"message":message,"data":data})
 

@@ -1,4 +1,4 @@
-import ssl
+# import ssl
 from pymongo import MongoClient
 
 
